@@ -3,7 +3,7 @@ const fileInput = document.getElementById("file-input") as HTMLInputElement;
 const jsonInput = document.getElementById("json-input") as HTMLTextAreaElement;
 const previewBtn = document.getElementById("preview-btn") as HTMLButtonElement;
 
-fileInput.addEventListener("change", async (e) => {
+fileInput.addEventListener("change", async () => {
   const file = fileInput.files?.[0];
   if (!file) return;
 
