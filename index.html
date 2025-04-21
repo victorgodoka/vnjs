@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Load Scene</title>
+  <link href="/src/styles.css" rel="stylesheet" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+</head>
+
+<body class="bg-gray-900 text-white font-sans min-h-screen">
+  <nav class="bg-gray-800">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div class="relative flex h-16 items-center justify-between">
+        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+          <div class="flex shrink-0 items-center">
+            <img class="h-12" src="/logo.png" alt="VN.js Logo" />
+          </div>
+          <div class="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
+            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+            <a href="/" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Home</a>
+            <a href="/dashboard"
+              class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Dashboard</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu, show/hide based on menu state. -->
+    <div class="sm:hidden" id="mobile-menu">
+      <div class="space-y-1 px-2 pt-2 pb-3">
+        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+         <a href="/"
+          class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
+        <a href="dashboard"
+          class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Dashboard</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-3xl mx-auto space-y-6 p-8">
+    <h1 class="text-3xl font-bold">Load a Scene JSON</h1>
+
+    <textarea id="json-input" class="w-full h-64 p-4 bg-gray-800 border border-gray-600 rounded text-sm font-mono"
+      placeholder="Paste your scene JSON here..."></textarea>
+    <p class="text-3xl text-center">OR</p>
+    <div class="text-center">
+      <input type="file" id="file-input" accept="application/json" class="hidden" />
+      <label for="file-input"
+        class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded cursor-pointer">Choose a
+        JSON file</label>
+    </div>
+    <button id="preview-btn" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded">Preview
+      Scene</button>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

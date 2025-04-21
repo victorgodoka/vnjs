@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VN Scene Dashboard</title>
+  <script type="module" src="/src/dashboard.ts"></script>
+  <link href="/src/styles.css" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+</head>
+
+<body class="bg-gray-900 text-white font-sans min-h-screen">
+  <nav class="bg-gray-800">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div class="relative flex h-16 items-center justify-between">
+        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+          <div class="flex shrink-0 items-center">
+            <img class="h-12" src="/logo.png" alt="VN.js Logo" />
+          </div>
+          <div class="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
+            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+            <a href="/" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
+            <a href="/dashboard"
+              class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Dashboard</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Mobile menu, show/hide based on menu state. -->
+    <div class="sm:hidden" id="mobile-menu">
+      <div class="space-y-1 px-2 pt-2 pb-3">
+        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+        <a href="/"
+          class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
+        <a href="dashboard"
+          class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Dashboard</a>
+      </div>
+    </div>
+  </nav>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl mx-auto p-8">
+    <div>
+      <h2 class="text-2xl font-bold mb-4">Scene Metadata</h2>
+      <form id="meta-form" class="space-y-4">
+        <div>
+          <label for="background">Main Background</label>
+          <select id="background" class="w-full p-2 rounded bg-gray-800 border border-gray-600"></select>
+          <img id="background-preview" src="https://placehold.co/200?text=Avatar"
+            class="w-64 h-64 object-contain border border-gray-700 rounded mt-2" />
+        </div>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="flex flex-col gap-4">
+            <label for="textbox-bg">Textbox Background Color</label>
+            <input type="color" id="textbox-bg" placeholder="Textbox Background Color" class="w-full h-12 p-1 rounded bg-gray-800 border border-gray-600" />
+          </div>
+          <div class="flex flex-col gap-4">
+            <label for="textbox-text">Textbox Text Color</label>
+            <input type="color" id="textbox-text" placeholder="Textbox Text Color" class="w-full h-12 p-1 rounded bg-gray-800 border border-gray-600" />
+          </div>
+          <div class="flex flex-col gap-4">
+            <label for="textbox-speaker">Speaker Name Color</label>
+            <input type="color" id="textbox-speaker" placeholder="Speaker Name Color" class="w-full h-12 p-1 rounded bg-gray-800 border border-gray-600" />
+          </div>
+        </div>
+      </form>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Add Dialogue</h2>
+      <form id="dialogue-form" class="space-y-4">
+        <input type="text" id="speaker" placeholder="Speaker"
+          class="w-full p-2 rounded bg-gray-800 border border-gray-600" />
+        <input type="text" id="text" placeholder="Text" class="w-full p-2 rounded bg-gray-800 border border-gray-600" />
+        
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label for="avatar">Avatar</label>
+            <select id="avatar" class="w-full p-2 rounded bg-gray-800 border border-gray-600"></select>
+            <img id="avatar-preview" src="https://placehold.co/200?text=Avatar" class="w-32 h-32 object-contain border border-gray-700 rounded mt-2" />
+          </div>
+          
+          <div>
+            <label for="others">Other Avatar (opposite side)</label>
+            <select id="others" class="w-full p-2 rounded bg-gray-800 border border-gray-600"></select>
+            <img id="other-preview" src="https://placehold.co/200?text=Avatar" class="w-32 h-32 object-contain border border-gray-700 rounded mt-2" />
+          </div>
+        </div>
+
+        <div>
+          <label class="mr-4"><input type="radio" name="position" value="left" checked class="mr-1" /> Left</label>
+          <label><input type="radio" name="position" value="right" class="mr-1" /> Right</label>
+        </div>
+        <button type="button" id="add-dialogue"
+          class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">Add Dialogue</button>
+      </form>
+
+      <button type="button" id="reset-scene"
+        class="mt-6 bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">Reset Scene</button>
+    </div>
+
+    <div>
+      <h2 class="text-2xl font-bold mb-4">Scene JSON Output</h2>
+      <textarea id="output" readonly
+        class="w-full h-[600px] p-4 bg-gray-800 border border-gray-600 rounded text-sm font-mono"></textarea>
+        <button id="download-json" class="mt-2 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+          Download JSON
+        </button>
+    </div>
+  </div>
+</body>
+
+</html>
